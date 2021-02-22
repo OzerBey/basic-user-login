@@ -1,0 +1,36 @@
+<ion-header > 
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="CloseToDoModal()" color="secondary">
+        <ion-icon class="kirmizi" size="large" ios="close-circle-outline" md="close-circle-sharp" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Add List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="my-custom-class" [fullscreen]="true">
+<!--görev ekleme yeri-->
+  <ion-item>
+  <ion-label position="floating">Name</ion-label>
+  <ion-input [(ngModel)]="toDoName" ></ion-input>
+  {{name}}
+  </ion-item>
+
+  <ion-item>
+  <ion-label position="floating">Description</ion-label>
+  <ion-input [(ngModel)]="toDoDesc" ></ion-input>
+  </ion-item>
+
+
+  <!-- EKLEME ONAY BUTONU -->
+  <div class="ion-text-center">
+    <p>
+    <ion-button color="success" size="large" expand="fill" fill="outline" (click)="addTodo()" [disabled]="!toDoName || !toDoDesc || toDoName.length<3" >Add</ion-button>  
+  <p>
+  </div>
+  
+    
+</ion-content>

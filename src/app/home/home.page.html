@@ -1,20 +1,180 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"> <!-- scrool edince header kısmını görünür olup olmaması durumu-->
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon *ngIf="userData?.ad"  color="danger" slot="icon-only" name="person-circle"></ion-icon>
+        <div class="yesilVeKalin"> {{userData?.ad}} <!--userData? adı varsa yazar yoksa hiçbir şey yazmaz--> </div>  
+       
+      </ion-button>
+   
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button (click)="openToDoModal()" color="dark">
+        <ion-icon *ngIf="userData?.ad"  color="success" ios="add-circle-outline" md="add-circle-sharp" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Lists</ion-title>
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content [fullscreen]="true">
+   <!--
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
+-->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+ 
+  <!-- LOGIN PAGE-->
+  <div *ngIf="!userData?.id>0 && !sifreUnutma"  id="container" >
+
+    <img src="../assets/signin.png" >
+
+ 
+<!-- username input area-->
+
+    <ion-item  class="siyah">
+  <ion-label class="beyaz" position="floating">Username</ion-label>
+  <ion-input class="beyaz" [(ngModel)]="username"></ion-input>
+  </ion-item>
+<br>
+
+<!--password input area-->
+
+    <ion-item class="siyah">
+      <ion-label class="beyaz" position="floating">Password</ion-label>
+      <ion-input class="beyaz" type="password" [(ngModel)]="password" ></ion-input>  <!-- giris tipini secebiliyoruz -->
+      </ion-item>
+
+<div class="paddingTop20"> 
+<!--veri kontrolü
+  div>
+  Test: {{userData.id}}
+</div>
+-->
+
+<!-- button submit-->
+
+<div class="loginButton"> <br>
+    <!-- Round -->
+<ion-button color="success" size="large" expand="fill" fill="outline" [disabled]=" !username || !password || password.length<3 " (click)="login()">Sign in </ion-button>
+  <p>
+<!-- Round -->
+<div>
+  <ion-button color="danger" size="large" class="loginButton" expand="fill" fill="outline" (click)="openModal('save')">Sign Up </ion-button>
+  <p>
+
+                     <!--şifremi unuttum butonu kısmı-->    
+  <div > 
+    
+    <p> <ion-item class="ion-text-center" (click)="sifremiUnuttum('true')">
+    <ion-label>Şifremi Unuttum !</ion-label>
+    </ion-item>
+    </p>
+    
+    
+   </div>
+</div>
+</div>
+ 
+  
+  <!--buton çesitleri-->
+  <!-- <ion-button expand="full" fill="outline">Login</ion-button> 
+  <ion-button expand="block" fill="outline">Login</ion-button> -->
+
+  <!--  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  -->
+
+</div>
+</div>
+<!-- login page-->
+
+      <!--verilerin akıtıldıgı yer-->
+                                   <!--LOGİN HOME PAGE-->
+  <div *ngIf="userData?.id>0 && !sifreUnutma">
+
+    <ion-list>
+      
+      
+      <!-- //slide olmadan list yapısı
+        <ion-item *ngFor="let todo of todoList" (click)="detayAc(todo)">
+          <ion-label>{{todo.name}}
+            <p>{{todo.date}}</p>
+            <br>
+            <p>{{todo.desc}}</p>
+          </ion-label>
+        </ion-item>
+          -->  
+        <!-- Multi-line sliding item with icon options on both sides -->
+      <ion-item-sliding id="item100" *ngFor="let todo of todoList" >
+        <ion-item (click)="detayAc(todo)">
+          <ion-label>
+            <h2>{{todo.name}}</h2>
+            <p>{{todo.desc}}</p>
+            <p>{{todo.date}}</p>
+            <p>Deneme</p>
+          </ion-label>
+          <ion-note slot="end">
+            ✓
+          </ion-note>
+        </ion-item>
+
+        <ion-item-options side="start">
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="toDoDelete(todo.id)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="star"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+      
+    </ion-list>
+ <!--
+   <ion-button shape="round" fill="outline" class="loginButton" (click)="cikis()">Çıkış</ion-button>
+ -->   
+
+
+
+  </div> 
+ 
+                                   <!--Şifre Unutma kurtarma alanı-->
+  <div *ngIf="sifreUnutma" class="center">
+  
+    <img src="../assets/forgotmail.png" >
+<!-- username input area--> 
+
+<ion-item  class="siyah">
+  <ion-label class="beyaz" position="floating">e- mail</ion-label>
+  <ion-input type="email" class="beyaz" [(ngModel)]="email"></ion-input>
+  </ion-item>
+<br>
+<ion-button color="success" size="large" expand="fill" fill="outline" [disabled]="!email" (click)="sifremiUnuttum('true',email)">Send</ion-button>
+<br>
+<ion-button color="danger" size="large" expand="fill" fill="outline"(click)="sifremiUnuttum('false',email)" >User Login</ion-button> <!--(click)="userLoginKontrol()"-->
+ 
+
+
   </div>
+
 </ion-content>
+
+
+<div  class="ion-text-center" *ngIf="userData?.id>0 && !sifreUnutma"> <!--buradaki ?: o deger varsa demektir yoksa bakmaz oraya aksi halde hata fırlatır-->
+  <!--user login olduktan sonra bosluga düşer buraya girer yani-->
+<ion-button color="danger"(click)="cikis()" expand="fill" >Log out</ion-button>
+  <p>

@@ -1,3 +1,47 @@
+/*#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-button{
+  width: 270px;
+  padding-left:150px;
+}
+
+.loginButton{
+  width: 270px;
+}
+
+.center{
+  width: center;
+}
+
+.beyaz{
+  color: white;
+}*/
 #container {
   text-align: center;
 
@@ -24,4 +68,23 @@
 
 #container a {
   text-decoration: none;
+}
+
+.loginButton{
+  width: 410px;
+}
+
+ion-toolbar{
+  --border-color:rgb(0, 0, 0);
+}
+.center{
+  width: center;
+}
+
+.beyaz{
+  color: white;
+}
+.yesilVeKalin{
+  color: rgb(15, 189, 15);
+  font-weight:bold; 
 }

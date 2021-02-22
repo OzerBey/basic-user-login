@@ -1,0 +1,88 @@
+<ion-header > 
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="modalClose()" color="secondary">
+        <ion-icon class="beyaz" size="large" ios="close-circle-outline" md="close-circle-sharp" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      User Registration Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="my-custom-class" [fullscreen]="true">
+  <!-- login Page-->
+  <div>
+
+    <img src="../assets/signup.png" >
+
+<!-- name input area-->
+
+<ion-item  class="siyah">
+  <ion-label class="beyaz" position="floating">Name</ion-label>
+  <ion-input class="beyaz" [(ngModel)]='ad'></ion-input>
+  </ion-item>
+<br>
+<!-- surname input area-->
+
+<ion-item  class="siyah">
+  <ion-label class="beyaz" position="floating">Surname</ion-label>
+  <ion-input class="beyaz" [(ngModel)]="soyad"></ion-input>
+  </ion-item>
+<br>
+ 
+<!-- username input area-->
+
+    <ion-item  class="siyah">
+  <ion-label class="beyaz" position="floating">Username</ion-label>
+  <ion-input class="beyaz" [(ngModel)]="username"></ion-input>
+  </ion-item>
+<br>
+
+<!--password input area-->
+
+    <ion-item class="siyah">
+      <ion-label class="beyaz" position="floating">Password</ion-label>
+      <ion-input class="beyaz" type="password" [(ngModel)]="password" ></ion-input>  <!-- giris tipini secebiliyoruz -->
+      </ion-item>
+
+      
+<div class="paddinTop20"> 
+<!--veri kontrolü
+  div>
+  Test: {{userData.id}}
+</div>
+
+button submit-->
+
+<div class="loginButton"> <br>
+<div>
+
+  <ion-button color="success" size="large" class="logiButton" expand="fill" fill="outline" (click)="userSave()" [disabled]="!username || !password || !ad || !soyad || password.length<3" >User Save</ion-button>  
+  <p>
+    
+      <!-- <p>
+      <ion-button  size="large" fill="outline" class="loginButton" (click)="git()">Return Main</ion-button>
+      </p>
+      --> 
+</div>
+
+</div>
+
+  <!--buton çesitleri-->
+  <!-- <ion-button expand="full" fill="outline">Login</ion-button> 
+  <ion-button expand="block" fill="outline">Login</ion-button> -->
+
+  <!--  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  -->
+
+</div>
+</div>
+<!-- login page-->
+
+</ion-content>
